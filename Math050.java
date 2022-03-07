@@ -1,8 +1,10 @@
-import java.awt.Point;
-import java.util.*;
 
-class Main {
+import java.util.*;
+import java.io.*;
+
+public class Math050 {
 	static Scanner sc = new Scanner(System.in);
+	static PrintWriter out = new PrintWriter(System.out);
 
 	public static int nextInt() {
 		return Integer.parseInt(sc.next());
@@ -16,25 +18,24 @@ class Main {
 	static char[] ABCArray = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
 
 	public static void main(String[] args) {
-		double A = nextInt(); // Aまで全員もらえる
-		double B = nextInt(); // Bまで確率でもらえる
-		double C = nextInt(); // C人に配られる
-		double X = nextInt(); // いろはちゃん順位
-		double ans = 0;
-		if(X <= A) {
-			ans = 1;
-			System.out.println(ans);
-			return;
-		}
-
-		if(X > B) {
-			ans = 0;
-			System.out.println(ans);
-			return;
-		}
-		ans = C/(B-A);
-
+		int a = nextInt();
+		int b = nextInt();
+		int mod = 1000000007;
+		long ans = modPow(a,b,mod);
 		System.out.println(ans);
 	}
 
+	static long modPow(int a,int b,int mod) {
+		long ans = 1;
+		long p = a;
+		for(int i = 0; i < 30;i++) {
+			if((b&(1<<i))!=0) {
+				ans *= p;
+				ans %= mod;
+			}
+			p *= p;
+			p %= mod;
+		}
+		return ans;
+	}
 }

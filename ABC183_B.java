@@ -1,8 +1,11 @@
-import java.awt.Point;
-import java.util.*;
 
-class Main {
+import java.util.*;
+import java.io.*;
+import java.awt.geom.Line2D;
+
+public class ABC183_B {
 	static Scanner sc = new Scanner(System.in);
+	static PrintWriter out = new PrintWriter(System.out);
 
 	public static int nextInt() {
 		return Integer.parseInt(sc.next());
@@ -12,29 +15,18 @@ class Main {
 		return Long.parseLong(sc.next());
 	}
 
+
 	static char[] abcArray = "abcdefghijklmnopqrstuvwxyz".toCharArray();
 	static char[] ABCArray = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
 
 	public static void main(String[] args) {
-		double A = nextInt(); // Aまで全員もらえる
-		double B = nextInt(); // Bまで確率でもらえる
-		double C = nextInt(); // C人に配られる
-		double X = nextInt(); // いろはちゃん順位
-		double ans = 0;
-		if(X <= A) {
-			ans = 1;
-			System.out.println(ans);
-			return;
-		}
+		double sX = nextLong();
+		double sY = nextLong();
+		double gX = nextLong();
+		double gY = nextLong();
 
-		if(X > B) {
-			ans = 0;
-			System.out.println(ans);
-			return;
-		}
-		ans = C/(B-A);
-
+		double ans = (sX*gY+gX*sY) / (sY+gY);
 		System.out.println(ans);
-	}
 
+	}
 }

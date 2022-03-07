@@ -6,74 +6,88 @@ public class ABC223_C {
 	public static int nextInt() {
 		return Integer.parseInt(sc.next());
 	}
+
 	public static void main(String[] args) {
 		int N = sc.nextInt();
-
-		ArrayList<double[]> list = new ArrayList<double[]>();
-		for(int i = 0; i < N;i++) {
-			double a = sc.nextInt();
-			double b = sc.nextInt();
-			double[] tmp;
-			if(a < b) {
-				tmp = new double[]{a,b,a/b};
-			} else {
-				tmp = new double[]{a,b,a*b};
-			}
-			list.add(tmp);
+		ArrayList<double[]> list = new ArrayList<>();
+		ArrayList<int[]> abList = new ArrayList<>();
+		double totalTime = 0;
+		long totalDis = 0;
+		for (int i = 0; i < N; i++) {
+			int a = nextInt();
+			int b = nextInt();
+			int[] ab = { a, b };
+			abList.add(ab);
+			totalDis += a;
+			totalTime += (double) a / b;
+			double[] array = { totalTime, totalDis };
+			list.add(array);
 		}
 
-		double ans = 0;
-		while(1 < list.size()) {
-			double[] first = list.get(0);
-			double[] last = list.get(list.size()-1);
+		double halfTime = totalTime / 2;
 
-			// 同じ時間で消費
-			if(first[2]==last[2]) {
-				ans+= first[2];
-				list.remove(0);
-				if(!list.isEmpty()) {
-					list.remove(list.size()-1);
+		if(N == 1) {
+			double[] array = list.get(0);
+			System.out.println(array[1]/2);
+			return;
+		}
+
+		int l = 0;
+		int r = N;
+		int index = 0;
+		while (l < r) {
+			int middle = (l + r) / 2;
+			double[] middleArray = list.get(middle);
+
+			if (halfTime == middleArray[0]) {
+				index = middle;
+				break;
+			}
+
+			double[] beforeArray = new double[2];
+			try {
+				beforeArray = list.get(middle - 1);
+				if (beforeArray[0] < halfTime && halfTime < middleArray[0]) {
+					index = middle - 1;
 				}
+			} catch (Exception e) {
+				index = 0;
+				break;
+			}
+
+			double[] afterArray = new double[2];
+			try {
+				afterArray = list.get(middle + 1);
+				if (middleArray[0] < halfTime && halfTime < afterArray[0]) {
+					index = middle;
+					break;
+				}
+			} catch (Exception e) {
+				if (halfTime <= middleArray[0]) {
+					index = N;
+					break;
+				}
+			}
+
+			if (halfTime < middleArray[0]) {
+				r = middle;
 				continue;
 			}
 
-			// 前半が早く消費
-			if(first[2]< last[2]) {
-				last[2] =last[2] - first[2];
-				list.set(list.size()-1,last);
-				list.remove(0);
-				ans += first[2];
-				continue;
-			}
-
-			// 後半が早く消費
-			if(first[2] > last[2]) {
-				first[2] =first[2] - last[2];
-				list.set(0,first);
-				list.remove(list.size()-1);
-				ans += last[2];
+			if (halfTime > middleArray[0]) {
+				l = middle;
 				continue;
 			}
 		}
 
-		if(list.size() == 0) {
-			System.out.println(ans);
-			return ;
+		double[] hitArray = list.get(index);
+		if (index < N - 1) {
+			double mod = halfTime - hitArray[0];
+			int[] nextAb = abList.get(index + 1);
+			System.out.println(hitArray[1] + mod * nextAb[1]);
+			return;
 		}
-
-		double[] lastArray = list.get(0);
-		double a = lastArray[0];
-		double b = lastArray[1];
-		double c = lastArray[2];
-		double tmp = 0;
-		if(a < b) {
-			tmp = a/b;
-		} else {
-			tmp = a*b;
-		}
-
-		System.out.println(ans);
-
+		System.out.println(hitArray[1]);
 
 	}
 }

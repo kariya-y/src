@@ -1,53 +1,51 @@
-import java.io.BufferedOutputStream;
-import java.io.PrintWriter;
 import java.util.*;
 
-public class Tmp {
-	static Scanner sc = new Scanner(System.in);
+class Tmp {
+	public static void MergeSort(int[] A, int[] C, int l, int r) {
+		if(r-l==1)return;
 
-	public static int nextInt() {
-		return Integer.parseInt(sc.next());
-	}
+		int m = (l+r)/2;
+		MergeSort(A,C, l ,m);
+		MergeSort(A,C, m ,r);
 
-	public static void main(String[] args) {
-
-		int N = 3;
-
-		ArrayList<Integer> numList = new ArrayList();
-		for (int i = 0; i < N; i++) {
-			int tmp = nextInt();
-			numList.add(tmp);
-		}
-		if (numList.get(0) == numList.get(1) || numList.get(0) == numList.get(2)
-				|| numList.get(1) == numList.get(2)) {
-			System.out.println(numList.get(0) + " ： " + numList.get(1) + " ： " + numList.get(2));
-		}
-
-		int a = numList.get(0);
-		int b = numList.get(1);
-		int c = numList.get(2);
-		if (a == b || a == c
-				|| b == c) {
-			System.out.println("abc");
-		}
-
-		int ans = 0;
-		for (int i = 0; i < numList.size(); i++) {
-			for (int j = i + 1; j < numList.size(); j++) {
-				for (int k = j + 1; k < numList.size(); k++) {
-					if (numList.get(i) == numList.get(j) || numList.get(i) == numList.get(k)
-							|| numList.get(j) == numList.get(k))
-						continue;
-					if (numList.get(i) < numList.get(j) + numList.get(k)
-							&& numList.get(j) < numList.get(i) + numList.get(k)
-							&& numList.get(k) < numList.get(i) + numList.get(j)) {
-						ans++;
-						System.out.println(numList.get(i) + "　" + numList.get(j) + "　" + numList.get(k));
-					}
+		int c1 = l, c2 = m, cnt = 0;
+		while(c1 != m || c2 != r) {
+			if(c1==m) {
+				// 列Aが空の場合
+				C[cnt] = A[c2];
+				c2++;
+			} else if(c2 == r) {
+				// 列Bが空の場合
+				C[cnt] = A[c1];
+				c1++;
+			} else {
+				if(A[c1] <= A[c2]) {
+					C[cnt] = A[c1];
+					c1++;
+				} else {
+					C[cnt] = A[c2];
+					c2++;
 				}
 			}
+			cnt++;
 		}
-		System.out.println(ans);
+		for (int i = 0; i < cnt; i++) A[l + i] = C[i];
+	}
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
 
+		// 入力
+		int N = sc.nextInt();
+		int[] A = new int[N + 1];
+		int[] C = new int[N + 1];
+		for (int i = 1; i <= N; i++) A[i] = sc.nextInt();
+
+		// マージソート
+		MergeSort(A, C, 1, N + 1);
+
+		// 出力
+		for (int i = 1; i <= N; i++) {
+			System.out.println(A[i]);
+		}
 	}
 }
