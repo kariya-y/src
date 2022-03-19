@@ -1,9 +1,10 @@
-import java.awt.Point;
-import java.util.*;
-import java.util.Map.Entry;
 
-class Main {
+import java.util.*;
+import java.io.*;
+
+public class Math084 {
 	static Scanner sc = new Scanner(System.in);
+	static PrintWriter out = new PrintWriter(System.out);
 
 	public static int nextInt() {
 		return Integer.parseInt(sc.next());
@@ -21,9 +22,16 @@ class Main {
 		long b = nextLong();
 		long c = nextLong();
 
-		long f =  (c - a - b) * (c - a - b);
-		double s = Math.pow(c-a-b, 2);
-		System.out.println(f);
-		System.out.println(s);
+		if (c - a - b < 0) {
+			System.out.println("No");
+			return;
+		}
+
+		System.out.println((c - a - b) * (c - a - b));
+		if (4 * a * b < (c - a - b) * (c - a - b)) {
+			System.out.println("Yes");
+		} else {
+			System.out.println("No");
+		}
 	}
 }
