@@ -1,6 +1,9 @@
-import java.util.*;
 
-class Main {
+import java.util.*;
+import java.io.*;
+
+public class ABC100_B {
+
 	public static int nextInt(Scanner sc) {
 		return Integer.parseInt(sc.next());
 	}
@@ -14,7 +17,21 @@ class Main {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		int N = sc.nextInt();
+		int D = nextInt(sc);
+		int N = nextInt(sc);
+		if(N==100) {
+			N++;
+		}
 		sc.close();
+		switch (D) {
+		case 0:
+			System.out.println(N);
+			return;
+		case 1:
+			System.out.println(N * 100);
+			return;
+		case 2:
+			System.out.println(N * 10000);
+		}
 	}
 }

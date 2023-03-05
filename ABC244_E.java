@@ -1,11 +1,17 @@
-import java.util.*;
 
-class Main {
-	public static int nextInt(Scanner sc) {
+import java.util.*;
+import java.io.*;
+
+
+public class ABC244_E {
+	static Scanner sc = new Scanner(System.in);
+	static PrintWriter out = new PrintWriter(System.out);
+
+	public static int nextInt() {
 		return Integer.parseInt(sc.next());
 	}
 
-	public static long nextLong(Scanner sc) {
+	public static long nextLong() {
 		return Long.parseLong(sc.next());
 	}
 
@@ -13,8 +19,6 @@ class Main {
 	static char[] ABCArray = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
 
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		int N = sc.nextInt();
-		sc.close();
+
 	}
 }

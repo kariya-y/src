@@ -1,6 +1,9 @@
-import java.util.*;
 
-class Main {
+import java.util.*;
+import java.io.*;
+
+
+public class ABC290_C {
 	public static int nextInt(Scanner sc) {
 		return Integer.parseInt(sc.next());
 	}
@@ -13,8 +16,6 @@ class Main {
 	static char[] ABCArray = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
 
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		int N = sc.nextInt();
-		sc.close();
+
 	}
 }

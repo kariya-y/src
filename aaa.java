@@ -8,7 +8,9 @@ public class aaa {
 	}
 
 	public static void main(String[] args) {
-		// TODO 自動生成されたメソッド・スタブ
+		int N = 5;
+		for(int p = 0; p < 1 << N; p++) {
+		}
 
 	}
 }

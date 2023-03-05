@@ -1,6 +1,9 @@
-import java.util.*;
 
-class Main {
+import java.util.*;
+import java.io.*;
+
+
+public class ABC273_A {
 	public static int nextInt(Scanner sc) {
 		return Integer.parseInt(sc.next());
 	}
@@ -14,7 +17,18 @@ class Main {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		int N = sc.nextInt();
+		int a = sc.nextInt();
+		long ans = a;
+		if(a == 0) {
+			System.out.println(1);
+			sc.close();
+			return;
+		}
+		for(int i = a-1; 0 < i ; i--) {
+			ans *= i;
+		}
+		System.out.println(ans);
 		sc.close();
+
 	}
 }
